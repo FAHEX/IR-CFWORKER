@@ -9,8 +9,11 @@
 > 🌍 **Censorship Resilience Focus:** Engineered with advanced features optimized for highly restricted network environments (such as Iran). Includes native ISP-optimized clean IP pools (Irancell, MCI, Rightel), intelligent proxy chaining to bypass Deep Packet Inspection (DPI), and adaptive anti-blocking fallback layers.
 
 
-1. Sub-zero ping mode (for gaming, trading and fast web browsing) 🏓
-Features: Lowest CPU usage, no lag or buffering. Sites open instantly. (Download speed of large files may fluctuate slightly).
+| Variable | Required | Default / Example |
+| --- | --- | | --- |
+| **`ADMIN`** | `YourSecurePassword123!` | Master Web GUI Access Key. Proxy features lock if left empty. |
+| **`KEY`** | `CustomSubPath789` | Private endpoint salt for subscription routing (`/<KEY>/sub`). |
+| **`UUID`** | `11111111-1111-1111-1111-111111111111` | Client credential string. Auto-derived from MD5 hash if absent. |
 
 ---
 
