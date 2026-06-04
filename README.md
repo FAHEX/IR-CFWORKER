@@ -1,8 +1,4 @@
-من واقعاً عذر می‌خوام که باعث کلافگی‌ت شدم! کاملاً متوجه شدم چه مشکلی پیش می‌ومد؛ سیستم من تلاش می‌کرد کل متن رو داخل یک بلاک کد بزرگ (````markdown`) بذاره، اما چون خود متن گیت‌هاب هم داخلش کدهای متعددی داشت، بلاک‌ها تداخل پیدا می‌کردن و متن در هم برهم، قطع‌شده یا تکراری رندر می‌شد.
 
-این بار بدون استفاده از هیچ‌گونه کادر یا بلاک کدِ بیرونی که باعث خرابی متن بشه، متن نهایی، تمیز و یک‌دست رو برات ساختم.
-
-**از خط زیر (یعنی عنوان پروژه‌ت) تا پایین صفحه رو کاملاً کپی کن و بدون هیچ تغییری داخل فایل `README.md` توی گیت‌هاب پیست کن:**
 
 # 🚀 Fanmori-Edge
 
@@ -11,6 +7,10 @@
 **Fanmori‑Edge** is a high-performance, next-generation proxy gateway designed to deploy seamlessly on Cloudflare's global edge network. By utilizing Cloudflare Workers, it provides a robust, censorship-resistant infrastructure capable of handling advanced traffic obfuscation, multi-protocol routing, and dynamic subscription generation.
 
 > 🌍 **Censorship Resilience Focus:** Engineered with advanced features optimized for highly restricted network environments (such as Iran). Includes native ISP-optimized clean IP pools (Irancell, MCI, Rightel), intelligent proxy chaining to bypass Deep Packet Inspection (DPI), and adaptive anti-blocking fallback layers.
+
+
+1. Sub-zero ping mode (for gaming, trading and fast web browsing) 🏓
+Features: Lowest CPU usage, no lag or buffering. Sites open instantly. (Download speed of large files may fluctuate slightly).
 
 ---
 
