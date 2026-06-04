@@ -112,3 +112,19 @@ B -->|WebSocket/gRPC/XHTTP| C{Transport}
 C -->|If chain proxy| D[Upstream Proxy SOCKS5/HTTP/TURN]
 C -->|Direct| E[Target Server]
 D --> E
+
+Client sends a request with a special first packet (VLESS or Trojan header).
+
+Worker parses the header – extracts target host, port, and any early data.
+
+Routing decision:
+
+If globalSOCKS5 or a domain matches the SOCKS5白名单, it connects through an upstream proxy.
+
+Otherwise, it tries direct connection with pre‑resolved DNS (race dial).
+
+On failure, it falls back to PROXYIP relay.
+
+Connection is established – the Worker then pipes raw TCP/UDP data between the client WebSocket/gRPC stream and the remote socket.
+
+Subscription endpoints read local IP pools or fetch from API, then generate protocol‑specific configs.
