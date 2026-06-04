@@ -111,20 +111,55 @@ A[Client] -->|VLESS/Trojan/SS| B[Cloudflare Worker]
 B -->|WebSocket/gRPC/XHTTP| C{Transport}
 C -->|If chain proxy| D[Upstream Proxy SOCKS5/HTTP/TURN]
 C -->|Direct| E[Target Server]
-D --> E
+D --> E ``````
 
-Client sends a request with a special first packet (VLESS or Trojan header).
+## 🧩 How It Works – Under the Hood
 
-Worker parses the header – extracts target host, port, and any early data.
+1. **Client** sends a request with a special first packet (VLESS or Trojan header).  
+2. **Worker** parses the header – extracts target host, port, and any early data.  
+3. **Routing decision**:  
+   - If `globalSOCKS5` or a domain matches the `SOCKS5白名单`, it connects through an upstream proxy.  
+   - Otherwise, it tries **direct** connection with pre‑resolved DNS (race dial).  
+   - On failure, it falls back to `PROXYIP` relay.  
+4. **Connection** is established – the Worker then **pipes** raw TCP/UDP data between the client WebSocket/gRPC stream and the remote socket.  
+5. **Subscription** endpoints read local IP pools or fetch from API, then generate protocol‑specific configs.
 
-Routing decision:
+---
 
-If globalSOCKS5 or a domain matches the SOCKS5白名单, it connects through an upstream proxy.
+## ⚠️ Limitations
 
-Otherwise, it tries direct connection with pre‑resolved DNS (race dial).
+| Limitation | Explanation |
+|------------|-------------|
+| **UDP only for DNS** | Only UDP port 53 is supported (via DNS‑over‑TCP to 8.8.4.4). Any other UDP traffic is rejected. |
+| **Worker CPU time** | Free plan has 10ms CPU time per request – heavy traffic may be limited. |
+| **KV rate limits** | Free KV has 1k reads/day, 1k writes/day. Use caching to avoid exhaustion. |
+| **TURN/SSTP complexity** | Those protocols require additional round trips and may be unstable over Cloudflare. |
+| **IPv6** | Supported, but some upstream proxies may not handle it correctly. |
+| **gRPC streaming** | Works, but error handling is limited – connections may hang if not properly closed. |
 
-On failure, it falls back to PROXYIP relay.
+---
 
-Connection is established – the Worker then pipes raw TCP/UDP data between the client WebSocket/gRPC stream and the remote socket.
+## 💰 Donation
 
-Subscription endpoints read local IP pools or fetch from API, then generate protocol‑specific configs.
+If you find this project useful, consider supporting the author:
+
+- **BTC**: `bc1q...` (not provided here – add your own)  
+- **USDT (TRC20)**: `T...`  
+- **GitHub Sponsor**: [Click to sponsor](https://github.com/sponsors/fanmori)
+
+---
+
+## 🛠️ Advanced Customization
+
+### Using Clean IP Pools
+- Edit `ADD.txt` via admin panel – each line: `IP:PORT#Remark`  
+- Or use `PROXYIP` with domain names that return TXT records containing IP lists.  
+- In `config.json` → `优选订阅生成` → set `local: true` to use the internal random IP generator.
+
+### Chain Proxy via URL
+Append to the WebSocket path:  
+`/video/<base64_encoded_json>`
+
+Example JSON:  
+```json
+{ "type": "socks5", "username": "user", "password": "pass", "hostname": "myproxy.com", "port": 1080 }
