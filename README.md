@@ -8,12 +8,44 @@
 
 > 🌍 **Censorship Resilience Focus:** Engineered with advanced features optimized for highly restricted network environments (such as Iran). Includes native ISP-optimized clean IP pools (Irancell, MCI, Rightel), intelligent proxy chaining to bypass Deep Packet Inspection (DPI), and adaptive anti-blocking fallback layers.
 
+بله، حتماً! حق با شماست، متن‌های طولانی گم می‌شن. بیایید کوتاه و فولادیش کنیم. 
 
-| Variable | Required | Default / Example |
-| --- | --- | | --- |
-| **`ADMIN`** | `YourSecurePassword123!` | Master Web GUI Access Key. Proxy features lock if left empty. |
-| **`KEY`** | `CustomSubPath789` | Private endpoint salt for subscription routing (`/<KEY>/sub`). |
-| **`UUID`** | `11111111-1111-1111-1111-111111111111` | Client credential string. Auto-derived from MD5 hash if absent. |
+من ۳ پیش‌فرض (Preset) برای همون خطوط اول کد ورکرتون آماده کردم. بسته به نیازتون، **فقط یکی از این ۳ بلوک رو** کپی کنید و جایگزین خطوط مشابه در ابتدای کدتون بکنید:
+
+### 1. Sub-zero ping mode (for gaming, trading and fast web browsing) 🏓
+Features: Lowest CPU usage, no lag or buffering. Sites open instantly. (Download speed of large files may fluctuate slightly).
+
+```javascript
+const WS早期数据最大字节 = 2 * 1024, WS早期数据最大头长度 = Math.ceil(WS早期数据最大字节 * 4 / 3) + 4;
+const uploadBundleTarget = 2 * 1024, uploadQueueMaxBytes = 1 * 1024 * 1024, uploadQueueMaxItems = 512;
+const downloadGrainBytes = 4 * 1024, downloadGrainTailThreshold = 512, downloadGrainSilenceMs = 0;
+let tcpConcurrency = 1, preloadRaceDial = false;
+```
+
+---
+### 2. Speed ​​Mode Off (For Heavy Downloads, Torrents and 4K YouTube) 🚀
+*Features:* Large buffers to fully saturate bandwidth. Ping will be slightly higher (as data is accumulated before being sent) but download speed will be capped.
+
+```javascript
+const WS早期数据最大字节 = 16 * 1024, WS早期数据最大头长度 = Math.ceil(WS早期数据最大字节 * 4 / 3) + 4;
+const uploadBundleTarget = 16 * 1024, uploadQueueMaxBytes = 8 * 1024 * 1024, uploadQueueMaxItems = 2048;
+const downloadGrainBytes = 128 * 1024, downloadGrainTailThreshold = 8192, downloadGrainSilenceMs = 5;
+let tcpConcurrency = 2, preloadRaceDial = false;
+```
+
+---
+
+### ۳. حالت تعادل طلایی (پیشنهاد من برای استفاده روزمره) ⚖️
+*ویژگی:* بهترین ترکیب. هم پینگ عالی داره، هم سرعت دانلود رو به خوبی هندل می‌کنه و کمترین خطای CPU رو تولید می‌کنه.
+
+```javascript
+const WS早期数据最大字节 = 4 * 1024, WS早期数据最大头长度 = Math.ceil(WS早期数据最大字节 * 4 / 3) + 4;
+const uploadBundleTarget = 4 * 1024, uploadQueueMaxBytes = 2 * 1024 * 1024, uploadQueueMaxItems = 1024;
+const downloadGrainBytes = 16 * 1024, downloadGrainTailThreshold = 2048, downloadGrainSilenceMs = 0;
+let tcpConcurrency = 1, preloadRaceDial = false;
+```
+
+هر کدوم رو انتخاب کردید، فقط همون رو بذارید تو کد و دیپلوی کنید. 🚀
 
 ---
 
