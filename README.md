@@ -10,7 +10,7 @@
 
 من ۳ پیش‌فرض (Preset) برای همون خطوط اول کد ورکرتون آماده کردم. بسته به نیازتون، **فقط یکی از این ۳ بلوک رو** کپی کنید و جایگزین خطوط مشابه در ابتدای کدتون بکنید:
 
-### 1. Sub-zero ping mode (for gaming, trading and fast web browsing) 🏓
+### 1. Sub-zero ping mode (for gaming, fast web browsing) 🏓
 Features: Lowest CPU usage, no lag or buffering. Sites open instantly. (Download speed of large files may fluctuate slightly).
 
 ```javascript
